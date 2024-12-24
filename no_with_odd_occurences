@@ -1,0 +1,20 @@
+class Solution{   
+public:
+    int getOddOccurrence(int arr[], int n) {
+        map<int,int> hash;
+        int i;
+        for(i=0;i<n;i++)
+        {
+            hash[arr[i]]++;
+        }
+        map<int,int>::iterator it;
+        for(it=hash.begin();it!=hash.end();it++)
+        {
+            if(it->second%2!=0)
+            return it->first;
+        }
+        return -1;
+        //can use xor method by xoring all elements w each other.if element present even times it
+        //becomes 0
+    }
+};
