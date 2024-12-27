@@ -1,0 +1,23 @@
+int Solution::repeatedNumber(const vector<int> &A) {
+    int n=A.size();
+    if (n<3) {
+        return A[0];
+    }
+
+    vector<int>sortedA=A;
+    sort(sortedA.begin(),sortedA.end());
+
+    int count = 1;
+    for (int i=1;i<n;i++) {
+        if (sortedA[i]==sortedA[i-1]) {
+            count++;
+            if (count>n/3) {
+                return sortedA[i];
+            }
+        } else{
+            count=1;
+        }
+    }
+
+    return -1;
+}
