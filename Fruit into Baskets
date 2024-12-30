@@ -1,0 +1,33 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution {
+  public:
+    int totalFruits(vector<int> &arr) {
+        int l=0,r=0;
+        int n=arr.size();
+        int maxlen=0;
+        map <int,int> mymap;
+        while(r<n)
+        {
+            mymap[arr[r]]++;
+            if(mymap.size()>2)
+            {
+                
+                mymap[arr[l]]--;
+                if(mymap[arr[l]]==0)
+                {
+                    mymap.erase(arr[l]);
+                }
+                    l++;
+            }
+            {maxlen=max(maxlen,r-l+1);
+            r++;}
+            
+        }
+        return maxlen;
+    }
+};
