@@ -1,0 +1,68 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution {
+  public:
+    bool hasTripletSum(vector<int> &arr, int target) {
+        sort(arr.begin(),arr.end());
+        int i;
+        int n=arr.size();
+        int l=0,r=n-1;
+        for(i=0;i<n-2;i++)
+        {
+            l=i+1;
+            r=n-1;
+            while(l<r)
+            {
+                int sum=target-arr[i];
+                if(sum==arr[l]+arr[r])
+                {
+                    return true;
+                }
+                if(sum<arr[l]+arr[r])
+                {
+                    r--;
+                }
+                else if(sum>arr[l]+arr[r])
+                {
+                    l++;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore(); // Ignore newline character after t
+
+    while (t--) {
+        vector<int> arr;
+        int target;
+        string inputLine;
+
+        getline(cin, inputLine); // Read the array input as a line
+        stringstream ss(inputLine);
+        int value;
+        while (ss >> value) {
+            arr.push_back(value);
+        }
+
+        cin >> target;
+        cin.ignore(); // Ignore newline character after target input
+
+        Solution solution;
+        bool result = solution.hasTripletSum(arr, target);
+        cout << (result ? "true" : "false") << "\n";
+    }
+
+    return 0;
+}
+// } Driver Code Ends
