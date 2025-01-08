@@ -1,0 +1,40 @@
+class Solution {
+  public:
+  int first(vector<int> &mat,int low,int high)
+  {
+      int l=low;
+      int h=high;
+      int ind=-1;
+      int mid=(l+h)/2;
+      while(l<=h)
+      {
+          mid=(l+h)/2;
+          if(mat[mid]==1)
+          {
+              ind=mid;
+              h=mid-1;
+          }
+          else
+          {
+              l=mid+1;
+          }
+      }
+      return ind;
+  }
+    int minRow(vector<vector<int>> &mat) {
+        int r=mat.size();
+        int c=mat[0].size();
+        int max_ind=INT_MAX;
+        int min_row=1;
+        for(int i=0;i<r;i++)
+        {
+            int ind=first(mat[i],0,c-1);
+            if(ind!=-1&&ind<max_ind)
+            {
+                max_ind=ind;
+                min_row=i+1;
+            }
+        }
+        return min_row;
+    }
+};
