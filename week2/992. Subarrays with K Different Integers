@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int subarraysWithKDistinc(vector<int>& nums, int k) {
+        int r=0,l=0;
+        if(k==0)
+        return 0;
+        int n=nums.size();
+        map<int,int> mpp;
+        int count=0;
+        while(r<n)
+        {
+            mpp[nums[r]]++;
+            while(mpp.size()>k)
+            {
+                mpp[nums[l]]--;
+                if(mpp[nums[l]]==0)
+                {
+                    mpp.erase(nums[l]);
+                }
+                l++;
+            }
+            if(mpp.size()<=k)
+            {
+                count+=r-l+1;
+            }
+            r++;
+        }
+        return count;
+        
+    }
+    int subarraysWithKDistinct(vector<int>& nums, int k)
+    {
+        return subarraysWithKDistinc(nums,k)-subarraysWithKDistinc(nums,k-1);
+    }
+};
