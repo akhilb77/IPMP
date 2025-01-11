@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    int maxLen(vector<int> &arr) {
+        int sum=0;
+        int max_sum=0;
+        int maxlen=0;
+        int n=arr.size();
+        map<int,int> hash;
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=(arr[i]==0)?-1:1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            sum+=arr[i];
+            if(sum==0)
+            {
+                maxlen=i+1;
+            }
+            if(hash.find(sum)!=hash.end())
+            {
+                maxlen=max(maxlen,i-hash[sum]);
+            }
+            else
+            {
+                hash[sum]=i;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=(arr[i]==-1)?0:1;
+        }
+        return maxlen;
+    }
+};
