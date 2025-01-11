@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        int leftsub=1;
+        int rightsub=1;
+        int m=INT_MIN;
+        int n=arr.size();
+        for(int i=0;i<n;i++)
+        {
+            if(leftsub==0)
+            {
+                leftsub=1;
+            }
+            if(rightsub==0)
+            rightsub=1;
+            leftsub=leftsub*arr[i];
+            rightsub=rightsub*arr[n-1-i];
+            m=max(leftsub,max(rightsub,m));
+        }
+        return m;
+    }
+};
