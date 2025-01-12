@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int getKthFromLast(Node *head, int k) {
+        Node*p=head;
+        Node*q=head;;
+        for(int i=0;i<k;i++)
+        {
+            if(!p)
+            return -1;
+            p=p->next;
+        }
+        while(p)
+        {
+            p=p->next;
+            q=q->next;
+        }
+        return q->data;
+    }
+};
