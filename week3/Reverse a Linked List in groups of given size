@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    Node *reverseKGroup(Node *head, int k) {
+        Node* current=head;
+        Node* newhead=NULL;
+        Node* tail=NULL;
+        while(current)
+        {
+            Node* grouphead=current;
+            Node* next=NULL;
+            Node* prev=NULL;
+            int count=0;
+            while(current&&count<k)
+            {
+                next=current->next;
+                current->next=prev;
+                prev=current;
+                current=next;
+                count++;
+            }
+            if(newhead==NULL)
+            newhead=prev;
+            if(tail!=NULL)
+            {
+                tail->next=prev;
+            }
+            tail=grouphead;
+        }
+        return newhead;
+    }
+};
