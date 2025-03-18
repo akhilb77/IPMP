@@ -1,0 +1,48 @@
+class Solution {
+public:
+    void dfs(vector<vector<int>>& board,int u,int v,vector<vector<bool>>& visited)
+    {
+        int m=board.size();
+        int n=board[0].size();
+        visited[u][v]=true;
+        int dx[4]={0,1,0,-1};
+        int dy[4]={1,0,-1,0};
+        for(int i=0;i<4;i++)
+            {
+               int nx = u + dx[i];
+                int ny = v + dy[i];
+
+                    if(nx>=0&&nx<m&&ny>=0&&ny<n&&!visited[nx][ny]&&board[nx][ny]==1)
+                    {
+                        dfs(board,nx,ny,visited);
+                    } 
+            }
+    }
+    int numEnclaves(vector<vector<int>>& board) {
+        int m=board.size();
+        int n=board[0].size();
+       vector<vector<bool>> visited(m, vector<bool>(n, false));
+    int count=0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(board[i][j]==1&&!visited[i][j]&&(i==0||i==m-1||j==0||j==n-1))
+                {
+                    dfs(board,i,j,visited);
+                }
+            }
+        }
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(visited[i][j]==false&&board[i][j]==1)
+                {
+                    count++;
+                }
+            }
+        }
+    return count;
+    }
+};
