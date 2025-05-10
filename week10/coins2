@@ -1,0 +1,30 @@
+class Solution {
+public:
+int tar(int ind,vector<int>&coins,int target,vector<vector<int>>& dp)
+    {
+        
+        if(target==0)
+        {
+            return 1;
+        }
+        if(ind<0||target<0)
+        {
+            return 0;
+        }
+        if(dp[ind][target]!=-1)
+        return dp[ind][target];
+        int take = 0;
+        if (coins[ind] <= target) {
+            take = tar(ind, coins, target - coins[ind], dp);
+        }
+        int nottake=tar(ind-1,coins,target,dp);
+        return dp[ind][target] = take+ nottake;   
+    }
+    int change(int amount, vector<int>& coins) {
+        int n = coins.size();
+        int count=0;
+        vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
+        int ans = tar(n - 1, coins, amount, dp);
+        return ans;
+    }
+};
