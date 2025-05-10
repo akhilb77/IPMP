@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int tar(int ind,vector<int>&coins,int target,vector<vector<int>>& dp)
+    {
+        if(target==0)
+        {
+            return 0;
+        }
+        if(ind<0||target<0)
+        {
+            return INT_MAX;
+        }
+        if(dp[ind][target]!=-1)
+        return dp[ind][target];
+        int take = INT_MAX;
+        if (coins[ind] <= target) {
+            int res = tar(ind, coins, target - coins[ind], dp);
+            if (res != INT_MAX) {
+                take = 1 + res;
+            }
+        }
+        int nottake=tar(ind-1,coins,target,dp);
+        return dp[ind][target] = min(take, nottake);   
+    }
+    int coinChange(vector<int>& coins, int amount) {
+          int n = coins.size();
+        vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
+        int ans = tar(n - 1, coins, amount, dp);
+        return (ans >= INT_MAX) ? -1 : ans;
+    }
+};
